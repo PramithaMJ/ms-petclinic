@@ -65,22 +65,23 @@ Microservice Pet Clinic is a fully distributed, cloud-native application designe
 ## 📂 Repository Structure
 ```plaintext
 microservice-pet-clinic/
-│── api-gateway/  (Kong / Traefik)
-│── service-registry/ (Eureka / Consul)
-│── config-server/ (Spring Cloud Config)
-│── auth-service/ (Java)
-│── pet-service/ (Golang)
-│── owner-service/ (Python)
-│── vet-service/ (Node.js)
-│── visit-service/ (Java)
-│── billing-service/ (Golang)
-│── notification-service/ (Python)
-│── kafka-events/
-│── monitoring/ (Prometheus + Grafana)
-│── tracing/ (Zipkin / Jaeger)
-│── logs/ (ELK Stack)
-│── k8s/ (Helm Charts)
-│── docker-compose.yml
+│── api-gateway/       → Kong / Traefik
+│── service-registry/  → Eureka / Consul
+│── config-server/     → Spring Cloud Config
+│── services/
+│   ├── auth-service/      → Java (Spring Boot)
+│   ├── pet-service/       → Golang (Gin)
+│   ├── owner-service/     → Python (FastAPI)
+│   ├── vet-service/       → Node.js (Express)
+│   ├── visit-service/     → Java (Spring Boot)
+│   ├── billing-service/   → Golang (Fiber)
+│   ├── notification-service/ → Python (Celery)
+│── event-streaming/ → Kafka / RabbitMQ
+│── monitoring/      → Prometheus + Grafana
+│── tracing/         → Zipkin / Jaeger
+│── logging/         → ELK Stack (Elasticsearch, Logstash, Kibana)
+│── k8s/            → Kubernetes manifests
+│── ci-cd/          → GitHub Actions / Jenkins pipelines
 │── README.md
 ```
 
