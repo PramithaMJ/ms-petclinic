@@ -2,9 +2,11 @@ name: Node.js Services CI
 
 on:
   push:
+    branches: [ "main" ]
     paths:
       - 'services/vet-service/**'
   pull_request:
+    branches: [ "main" ]
     paths:
       - 'services/vet-service/**'
 

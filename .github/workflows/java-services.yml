@@ -2,10 +2,12 @@ name: Java Services CI
 
 on:
   push:
+    branches: [ "main" ]
     paths:
       - 'service-registry/**'
       - 'services/auth-service/**'
   pull_request:
+    branches: [ "main" ]
     paths:
       - 'service-registry/**'
       - 'services/auth-service/**'
