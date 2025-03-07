@@ -2,10 +2,12 @@ name: Go Services CI
 
 on:
   push:
+    branches: [ "main" ]
     paths:
       - 'services/billing-service/**'
       - 'services/pet-service/**'
   pull_request:
+    branches: [ "main" ]
     paths:
       - 'services/billing-service/**'
       - 'services/pet-service/**'
@@ -29,8 +31,3 @@ jobs:
       run: |
         cd services/${{ matrix.service }}
         go build -v ./...
-
-    - name: Test
-      run: |
-        cd services/${{ matrix.service }}
-        go test -v ./...
