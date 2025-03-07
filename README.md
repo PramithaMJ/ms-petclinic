@@ -1,4 +1,9 @@
 # Microservice Pet Clinic
+
+## Build Status
+[![Java Services CI](https://github.com/PramithaMJ/ms-petclinic/actions/workflows/java-services.yml/badge.svg)](https://github.com/PramithaMJ/ms-petclinic/actions/workflows/java-services.yml)
+[![Go Services CI](https://github.com/PramithaMJ/ms-petclinic/actions/workflows/go-services.yml/badge.svg)](https://github.com/PramithaMJ/ms-petclinic/actions/workflows/go-services.yml)
+[![Node.js Services CI](https://github.com/PramithaMJ/ms-petclinic/actions/workflows/node-services.yml/badge.svg)](https://github.com/PramithaMJ/ms-petclinic/actions/workflows/node-services.yml)
 [![Python application](https://github.com/PramithaMJ/ms-petclinic/actions/workflows/python-app.yml/badge.svg)](https://github.com/PramithaMJ/ms-petclinic/actions/workflows/python-app.yml)
 
 Microservice Pet Clinic is a fully distributed, cloud-native application designed to demonstrate the power of microservices architecture using multiple technologies like Java, Golang, Node.js, and Python. It follows best practices for service discovery, API management, monitoring, tracing, authentication, and CI/CD.
