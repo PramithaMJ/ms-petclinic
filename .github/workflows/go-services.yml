@@ -1,0 +1,36 @@
+name: Go Services CI
+
+on:
+  push:
+    paths:
+      - 'services/billing-service/**'
+      - 'services/pet-service/**'
+  pull_request:
+    paths:
+      - 'services/billing-service/**'
+      - 'services/pet-service/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service: ['billing-service', 'pet-service']
+        
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+
+    - name: Build
+      run: |
+        cd services/${{ matrix.service }}
+        go build -v ./...
+
+    - name: Test
+      run: |
+        cd services/${{ matrix.service }}
+        go test -v ./...
