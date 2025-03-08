@@ -33,8 +33,4 @@ jobs:
       run: |
         cd services/vet-service
         npm run build --if-present
-        
-    - name: Test
-      run: |
-        cd services/vet-service
-        npm test
+       

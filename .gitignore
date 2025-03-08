@@ -1,0 +1,4 @@
+service-registory/target
+services/auth-service/target
+services/vet-service/node_modules
+.DS_Store
