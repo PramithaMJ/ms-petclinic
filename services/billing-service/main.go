@@ -4,24 +4,17 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"log"
 	"time"
+	
+	"billing-service/types"
 )
 
-// Define Billing data structure
-type Billing struct {
-	TransactionID string  `json:"transaction_id"`
-	Amount        float64 `json:"amount"`
-	Currency      string  `json:"currency"`
-	PaymentMethod string  `json:"payment_method"`
-	Status        string  `json:"status"`
-	Timestamp     string  `json:"timestamp"`
-}
 
 func main() {
 	app := fiber.New()
 
 	// Sample route for creating a new bill
 	app.Post("/billing", func(c *fiber.Ctx) error {
-		billing := new(Billing)
+		billing := new(types.Billing)
 
 		// Parse the incoming JSON payload
 		if err := c.BodyParser(billing); err != nil {

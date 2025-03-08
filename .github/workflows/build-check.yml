@@ -45,6 +45,81 @@ jobs:
         fi
       continue-on-error: true
     
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+    
+    - name: Build Pet Service
+      run: |
+        if [ -d "services/pet-service" ]; then
+          cd services/pet-service
+          go build -v ./...
+        else
+          echo "Pet Service directory not found, skipping build"
+        fi
+      continue-on-error: true
+    
+    - name: Build Billing Service
+      run: |
+        if [ -d "services/billing-service" ]; then
+          cd services/billing-service
+          go build -v ./...
+        else
+          echo "Billing Service directory not found, skipping build"
+        fi
+      continue-on-error: true
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    
+    - name: Build Owner Service
+      run: |
+        if [ -d "services/owner-service" ]; then
+          cd services/owner-service
+          if [ -f "requirements.txt" ]; then
+            pip install -r requirements.txt
+          fi
+          echo "Python Owner Service build check completed"
+        else
+          echo "Owner Service directory not found, skipping build"
+        fi
+      continue-on-error: true
+    
+    - name: Build Notification Service
+      run: |
+        if [ -d "services/notification-service" ]; then
+          cd services/notification-service
+          if [ -f "requirements.txt" ]; then
+            pip install -r requirements.txt
+          fi
+          echo "Python Notification Service build check completed"
+        else
+          echo "Notification Service directory not found, skipping build"
+        fi
+      continue-on-error: true
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    
+    - name: Build Vet Service
+      run: |
+        if [ -d "services/vet-service" ]; then
+          cd services/vet-service
+          if [ -f "package.json" ]; then
+            npm ci
+            npm run build --if-present
+          fi
+          echo "Node.js Vet Service build check completed"
+        else
+          echo "Vet Service directory not found, skipping build"
+        fi
+      continue-on-error: true
+    
     # Add more services here as they are added to the project
     
     - name: Update PR with build status
