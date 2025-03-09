@@ -4,256 +4,499 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Microservice Pet Clinic</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --background: #0d1117;
-            --text: #c9d1d9;
-            --heading: #f0f6fc;
-            --link: #58a6ff;
-            --link-hover: #8cc2ff;
-            --border: #30363d;
-            --code-bg: #161b22;
-            --badge-bg: #238636;
-            --badge-text: #ffffff;
-            --table-header: #161b22;
-            --table-row-odd: #0d1117;
-            --table-row-even: #161b22;
-            --card-bg: #161b22;
+            --primary: #6419e6;
+            --primary-dark: #5015b9;
+            --secondary: #38bdf8;
+            --background: #0f172a;
+            --card-bg: #1e293b;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --heading: #f8fafc;
+            --border: #334155;
+            --success: #10b981;
+            --code-bg: #1e293b;
+            --animation-duration: 0.4s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.6;
             color: var(--text);
             background-color: var(--background);
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
+            transition: background-color var(--animation-duration) ease;
         }
 
-        h1, h2, h3 {
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            padding: 30px 0;
+            position: relative;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
             color: var(--heading);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo i {
+            color: var(--primary);
+        }
+
+        .theme-toggle {
+            background: var(--card-bg);
+            color: var(--text);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .hero {
+            padding: 60px 0;
+            text-align: center;
         }
 
         h1 {
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 10px;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--heading);
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: var(--text-muted);
+        }
+
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .badge img {
+            height: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .badge img:hover {
+            transform: translateY(-2px);
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        section:nth-child(even) {
+            background-color: rgba(30, 41, 59, 0.4);
         }
 
         h2 {
-            margin-top: 30px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 5px;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: var(--heading);
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        a {
-            color: var(--link);
-            text-decoration: none;
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--heading);
         }
 
-        a:hover {
-            color: var(--link-hover);
-            text-decoration: underline;
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
         }
 
-        code, pre {
-            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-            background-color: var(--code-bg);
-            border-radius: 3px;
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
         }
 
-        code {
-            padding: 2px 4px;
+        .feature-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+            height: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .architecture {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 30px;
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            font-family: 'Fira Code', 'Courier New', monospace;
+            white-space: pre;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin-top: 20px;
         }
 
         pre {
-            padding: 16px;
-            overflow: auto;
-            border-radius: 6px;
+            background-color: var(--code-bg);
+            padding: 20px;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            border: 1px solid var(--border);
+        }
+
+        code {
+            font-family: 'Fira Code', 'Courier New', monospace;
+            background-color: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9rem;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
+            margin: 30px 0;
+            border-radius: 12px;
+            overflow: hidden;
         }
 
         th {
-            background-color: var(--table-header);
+            background-color: var(--card-bg);
+            padding: 12px 15px;
             text-align: left;
-            padding: 8px;
-            border: 1px solid var(--border);
+            font-weight: 600;
         }
 
         td {
-            padding: 8px;
-            border: 1px solid var(--border);
+            padding: 12px 15px;
+            border-top: 1px solid var(--border);
         }
 
-        tr:nth-child(odd) {
-            background-color: var(--table-row-odd);
+        tr:hover {
+            background-color: rgba(30, 41, 59, 0.4);
         }
 
-        tr:nth-child(even) {
-            background-color: var(--table-row-even);
+        .steps {
+            counter-reset: step-counter;
+            list-style-type: none;
+            padding: 0;
         }
 
-        .badge {
-            display: inline-block;
-            margin-right: 5px;
-            margin-bottom: 5px;
-        }
-
-        .badge img {
-            height: 20px;
-        }
-
-        .feature-card {
-            background-color: var(--card-bg);
-            border-radius: 6px;
-            padding: 15px;
-            margin-bottom: 15px;
-            border: 1px solid var(--border);
-        }
-
-        .feature-card h3 {
-            margin-top: 0;
-        }
-
-        .emoji {
-            margin-right: 8px;
-        }
-
-        .architecture-diagram {
-            background-color: var(--code-bg);
-            padding: 16px;
-            border-radius: 6px;
-            overflow-x: auto;
-            font-family: monospace;
-            white-space: pre;
-            margin: 20px 0;
-        }
-
-        .toggle-container {
-            text-align: right;
+        .steps li {
+            position: relative;
             margin-bottom: 20px;
+            padding-left: 45px;
         }
 
-        .theme-toggle {
-            background-color: #30363d;
-            color: var(--text);
+        .steps li::before {
+            content: counter(step-counter);
+            counter-increment: step-counter;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 30px;
+            height: 30px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .cmd {
+            display: inline-block;
+            background-color: var(--card-bg);
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            width: 100%;
             border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 8px 15px;
+        }
+
+        ul, ol {
+            padding-left: 20px;
+            margin: 15px 0;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 60px;
+            border-top: 1px solid var(--border);
+        }
+
+        footer a {
+            color: var(--secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--primary);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
             cursor: pointer;
-            font-size: 14px;
         }
 
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(100, 25, 230, 0.3);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Light Mode Variables */
         .light-mode {
-            --background: #ffffff;
-            --text: #24292e;
-            --heading: #0366d6;
-            --link: #0366d6;
-            --link-hover: #0562ce;
-            --border: #e1e4e8;
-            --code-bg: #f6f8fa;
-            --badge-bg: #2ea44f;
-            --badge-text: #ffffff;
-            --table-header: #f6f8fa;
-            --table-row-odd: #ffffff;
-            --table-row-even: #f6f8fa;
-            --card-bg: #f6f8fa;
+            --primary: #6419e6;
+            --primary-dark: #5015b9;
+            --secondary: #0284c7;
+            --background: #f1f5f9;
+            --card-bg: #ffffff;
+            --text: #334155;
+            --text-muted: #64748b;
+            --heading: #0f172a;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --code-bg: #f8fafc;
         }
 
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            body {
-                padding: 15px;
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero {
+                padding: 40px 0;
+            }
+            
+            section {
+                padding: 40px 0;
             }
         }
     </style>
 </head>
 <body>
-    <div class="toggle-container">
-        <button class="theme-toggle" onclick="toggleTheme()">Toggle Light/Dark Mode</button>
-    </div>
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-paw"></i>
+                <span>MS Pet Clinic</span>
+            </a>
+            <button class="theme-toggle" aria-label="Toggle dark/light mode">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
 
-    <h1>Microservice Pet Clinic</h1>
-    
-    <p>Microservice Pet Clinic is a fully distributed, cloud-native application designed to demonstrate the power of microservices architecture using multiple technologies like Java, Golang, Node.js, and Python. It follows best practices for service discovery, API management, monitoring, tracing, authentication, and CI/CD.</p>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1 class="fade-in">Microservice Pet Clinic</h1>
+                <p class="fade-in">A fully distributed, cloud-native application demonstrating the power of microservices architecture using Java, Golang, Node.js, and Python.</p>
+                
+                <div class="badges fade-in">
+                    <a href="https://github.com/PramithaMJ/ms-petclinic/actions/workflows/build-check.yml" class="badge">
+                        <img src="https://github.com/PramithaMJ/ms-petclinic/actions/workflows/build-check.yml/badge.svg" alt="Build Status Check">
+                    </a>
+                    <a href="https://github.com/PramithaMJ/ms-petclinic/actions/workflows/java-services.yml" class="badge">
+                        <img src="https://github.com/PramithaMJ/ms-petclinic/actions/workflows/java-services.yml/badge.svg" alt="Java Services CI">
+                    </a>
+                    <a href="https://github.com/PramithaMJ/ms-petclinic/actions/workflows/go-services.yml" class="badge">
+                        <img src="https://github.com/PramithaMJ/ms-petclinic/actions/workflows/go-services.yml/badge.svg" alt="Go Services CI">
+                    </a>
+                    <a href="https://github.com/PramithaMJ/ms-petclinic/actions/workflows/node-services.yml" class="badge">
+                        <img src="https://github.com/PramithaMJ/ms-petclinic/actions/workflows/node-services.yml/badge.svg" alt="Node.js Services CI">
+                    </a>
+                    <a href="https://github.com/PramithaMJ/ms-petclinic/actions/workflows/python-app.yml" class="badge">
+                        <img src="https://github.com/PramithaMJ/ms-petclinic/actions/workflows/python-app.yml/badge.svg" alt="Python application">
+                    </a>
+                </div>
+                
+                <div class="btn-group fade-in">
+                    <a href="https://github.com/PramithaMJ/ms-petclinic" class="btn">
+                        <i class="fab fa-github"></i> View on GitHub
+                    </a>
+                </div>
+            </div>
+        </section>
 
-    <h2>Build Status</h2>
-    <div class="badge">
-        <a href="https://github.com/PramithaMJ/ms-petclinic/actions/workflows/build-check.yml">
-            <img src="https://github.com/PramithaMJ/ms-petclinic/actions/workflows/build-check.yml/badge.svg" alt="Build Status Check">
-        </a>
-    </div>
-    <div class="badge">
-        <a href="https://github.com/PramithaMJ/ms-petclinic/actions/workflows/java-services.yml">
-            <img src="https://github.com/PramithaMJ/ms-petclinic/actions/workflows/java-services.yml/badge.svg" alt="Java Services CI">
-        </a>
-    </div>
-    <div class="badge">
-        <a href="https://github.com/PramithaMJ/ms-petclinic/actions/workflows/go-services.yml">
-            <img src="https://github.com/PramithaMJ/ms-petclinic/actions/workflows/go-services.yml/badge.svg" alt="Go Services CI">
-        </a>
-    </div>
-    <div class="badge">
-        <a href="https://github.com/PramithaMJ/ms-petclinic/actions/workflows/node-services.yml">
-            <img src="https://github.com/PramithaMJ/ms-petclinic/actions/workflows/node-services.yml/badge.svg" alt="Node.js Services CI">
-        </a>
-    </div>
-    <div class="badge">
-        <a href="https://github.com/PramithaMJ/ms-petclinic/actions/workflows/python-app.yml">
-            <img src="https://github.com/PramithaMJ/ms-petclinic/actions/workflows/python-app.yml/badge.svg" alt="Python application">
-        </a>
-    </div>
+        <section id="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2><i class="fas fa-star"></i> Features</h2>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-cube feature-icon"></i>
+                        <h3>Microservices Architecture</h3>
+                        <p>Independently deployed services that work together to create a robust system.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <i class="fas fa-search feature-icon"></i>
+                        <h3>Service Discovery</h3>
+                        <p>Eureka / Consul for dynamic service registration and discovery.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <i class="fas fa-door-open feature-icon"></i>
+                        <h3>API Gateway</h3>
+                        <p>Kong / Traefik for centralized request handling and routing.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <i class="fas fa-cogs feature-icon"></i>
+                        <h3>Configuration Management</h3>
+                        <p>Spring Cloud Config / HashiCorp Vault for centralized configuration.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <i class="fas fa-exchange-alt feature-icon"></i>
+                        <h3>Asynchronous Messaging</h3>
+                        <p>Kafka / RabbitMQ for event-driven architecture and communication.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <i class="fas fa-lock feature-icon"></i>
+                        <h3>Authentication & Authorization</h3>
+                        <p>Keycloak with OAuth2 & JWT for secure identity management.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <i class="fas fa-chart-line feature-icon"></i>
+                        <h3>Monitoring & Tracing</h3>
+                        <p>Prometheus, Grafana, Zipkin / Jaeger for observability.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <i class="fas fa-file-alt feature-icon"></i>
+                        <h3>Centralized Logging</h3>
+                        <p>ELK Stack (Elasticsearch, Logstash, Kibana) for log management.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <i class="fas fa-rocket feature-icon"></i>
+                        <h3>CI/CD Pipeline</h3>
+                        <p>GitHub Actions, Jenkins, Kubernetes, Helm for continuous delivery.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <i class="fas fa-box feature-icon"></i>
+                        <h3>Containerization & Orchestration</h3>
+                        <p>Docker, Kubernetes, Helm, ArgoCD for deployment and management.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <h2><span class="emoji">📌</span>Features</h2>
-    <div class="feature-grid">
-        <div class="feature-card">
-            <h3>Microservices Architecture</h3>
-            <p>Independently deployed services</p>
-        </div>
-        <div class="feature-card">
-            <h3>Service Discovery</h3>
-            <p>Eureka / Consul for dynamic service registration</p>
-        </div>
-        <div class="feature-card">
-            <h3>API Gateway</h3>
-            <p>Kong / Traefik for centralized request handling</p>
-        </div>
-        <div class="feature-card">
-            <h3>Configuration Management</h3>
-            <p>Spring Cloud Config / HashiCorp Vault</p>
-        </div>
-        <div class="feature-card">
-            <h3>Asynchronous Messaging</h3>
-            <p>Kafka / RabbitMQ for event-driven architecture</p>
-        </div>
-        <div class="feature-card">
-            <h3>Authentication & Authorization</h3>
-            <p>Keycloak with OAuth2 & JWT</p>
-        </div>
-        <div class="feature-card">
-            <h3>Monitoring & Tracing</h3>
-            <p>Prometheus, Grafana, Zipkin / Jaeger</p>
-        </div>
-        <div class="feature-card">
-            <h3>Centralized Logging</h3>
-            <p>ELK Stack (Elasticsearch, Logstash, Kibana)</p>
-        </div>
-        <div class="feature-card">
-            <h3>CI/CD Pipeline</h3>
-            <p>GitHub Actions, Jenkins, Kubernetes, Helm</p>
-        </div>
-        <div class="feature-card">
-            <h3>Containerization & Orchestration</h3>
-            <p>Docker, Kubernetes, Helm, ArgoCD</p>
-        </div>
-    </div>
-
-    <h2><span class="emoji">🏗</span>Architecture</h2>
-    <div class="architecture-diagram">
+        <section id="architecture">
+            <div class="container">
+                <div class="section-header">
+                    <h2><i class="fas fa-project-diagram"></i> Architecture</h2>
+                </div>
+                
+                <div class="architecture">
                       +------------------------------------------------+
                       |               API Gateway (Kong)              |
                       |   - Handles Routing, Authentication (JWT)     |
@@ -298,10 +541,17 @@
         |  CI/CD: GitHub Actions + Jenkins + Kubernetes    |
         |  Docker, Helm, ArgoCD for Automated Deployment  |
         +--------------------------------------------------+
-    </div>
+                </div>
+            </div>
+        </section>
 
-    <h2><span class="emoji">📂</span>Repository Structure</h2>
-    <pre>
+        <section id="repository">
+            <div class="container">
+                <div class="section-header">
+                    <h2><i class="fas fa-folder-open"></i> Repository Structure</h2>
+                </div>
+                
+                <pre>
 microservice-pet-clinic/
 │── api-gateway/       → Kong / Traefik
 │── service-registry/  → Eureka / Consul
@@ -320,127 +570,203 @@ microservice-pet-clinic/
 │── logging/         → ELK Stack (Elasticsearch, Logstash, Kibana)
 │── k8s/            → Kubernetes manifests
 │── ci-cd/          → GitHub Actions / Jenkins pipelines
-│── README.md
-    </pre>
+│── README.md</pre>
+            </div>
+        </section>
 
-    <h2><span class="emoji">🚀</span>Getting Started</h2>
+        <section id="getting-started">
+            <div class="container">
+                <div class="section-header">
+                    <h2><i class="fas fa-play"></i> Getting Started</h2>
+                </div>
+                
+                <h3><i class="fas fa-clipboard-list"></i> Prerequisites</h3>
+                <ul>
+                    <li><i class="fab fa-docker"></i> Docker & Docker Compose</li>
+                    <li><i class="fas fa-dharmachakra"></i> Kubernetes & Helm</li>
+                    <li><i class="fab fa-java"></i> Java 17, <i class="fab fa-golang"></i> Golang, <i class="fab fa-node-js"></i> Node.js, <i class="fab fa-python"></i> Python</li>
+                    <li><i class="fas fa-database"></i> PostgreSQL / MongoDB</li>
+                    <li><i class="fas fa-stream"></i> Kafka / RabbitMQ</li>
+                </ul>
+                
+                <h3><i class="fas fa-terminal"></i> Running Services Locally</h3>
+                <h4>With Docker Compose</h4>
+                <div class="cmd">docker-compose up -d</div>
 
-    <h3>1️⃣ Prerequisites</h3>
-    <ul>
-        <li>Docker & Docker Compose</li>
-        <li>Kubernetes & Helm</li>
-        <li>Java 17, Golang, Node.js, Python</li>
-        <li>PostgreSQL / MongoDB</li>
-        <li>Kafka / RabbitMQ</li>
-    </ul>
+                <h4>With Kubernetes</h4>
+                <div class="cmd">kubectl apply -f k8s/</div>
+                
+                <h3><i class="fas fa-network-wired"></i> API Endpoints</h3>
+                <div style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Service</th>
+                                <th>Endpoint</th>
+                                <th>Method</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><i class="fas fa-lock"></i> Auth Service</td>
+                                <td>/auth/login</td>
+                                <td>POST</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fas fa-paw"></i> Pet Service</td>
+                                <td>/pets</td>
+                                <td>GET, POST</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fas fa-user"></i> Owner Service</td>
+                                <td>/owners</td>
+                                <td>GET, POST</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fas fa-user-md"></i> Vet Service</td>
+                                <td>/vets</td>
+                                <td>GET, POST</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fas fa-clipboard-check"></i> Visit Service</td>
+                                <td>/visits</td>
+                                <td>GET, POST</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fas fa-file-invoice-dollar"></i> Billing Service</td>
+                                <td>/billing</td>
+                                <td>POST</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
 
-    <h3>2️⃣ Running Services Locally</h3>
-    <h4>With Docker Compose</h4>
-    <pre><code>docker-compose up -d</code></pre>
+        <section id="cicd">
+            <div class="container">
+                <div class="section-header">
+                    <h2><i class="fas fa-code-branch"></i> CI/CD Pipeline</h2>
+                </div>
+                
+                <ol class="steps">
+                    <li><strong>GitHub Actions</strong> - Code build & testing</li>
+                    <li><strong>Jenkins</strong> - Continuous Integration</li>
+                    <li><strong>ArgoCD</strong> - Kubernetes GitOps deployment</li>
+                    <li><strong>Helm</strong> - Kubernetes package manager</li>
+                </ol>
+            </div>
+        </section>
 
-    <h4>With Kubernetes</h4>
-    <pre><code>kubectl apply -f k8s/</code></pre>
+        <section id="monitoring">
+            <div class="container">
+                <div class="section-header">
+                    <h2><i class="fas fa-chart-area"></i> Monitoring & Logging</h2>
+                </div>
+                
+                <div style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Component</th>
+                                <th>Purpose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><i class="fas fa-route"></i> Zipkin / Jaeger</td>
+                                <td>Distributed Tracing</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fas fa-tachometer-alt"></i> Prometheus + Grafana</td>
+                                <td>Metrics & Alerts</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fas fa-scroll"></i> ELK Stack</td>
+                                <td>Centralized Logging</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
 
-    <h3>3️⃣ API Endpoints</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>Service</th>
-                <th>Endpoint</th>
-                <th>Method</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Auth Service</td>
-                <td>/auth/login</td>
-                <td>POST</td>
-            </tr>
-            <tr>
-                <td>Pet Service</td>
-                <td>/pets</td>
-                <td>GET, POST</td>
-            </tr>
-            <tr>
-                <td>Owner Service</td>
-                <td>/owners</td>
-                <td>GET, POST</td>
-            </tr>
-            <tr>
-                <td>Vet Service</td>
-                <td>/vets</td>
-                <td>GET, POST</td>
-            </tr>
-            <tr>
-                <td>Visit Service</td>
-                <td>/visits</td>
-                <td>GET, POST</td>
-            </tr>
-            <tr>
-                <td>Billing Service</td>
-                <td>/billing</td>
-                <td>POST</td>
-            </tr>
-        </tbody>
-    </table>
+        <section id="contributing">
+            <div class="container">
+                <div class="section-header">
+                    <h2><i class="fas fa-users"></i> Contributing</h2>
+                </div>
+                <p>Feel free to contribute to this project! Open an issue or create a pull request on our GitHub repository.</p>
+                <p style="text-align: center; margin-top: 20px;">
+                    <a href="https://github.com/PramithaMJ/ms-petclinic/issues/new" class="btn">
+                        <i class="fas fa-exclamation-circle"></i> Open an Issue
+                    </a>
+                </p>
+            </div>
+        </section>
 
-    <h2><span class="emoji">🛠</span>CI/CD Pipeline</h2>
-    <ol>
-        <li><strong>GitHub Actions</strong> - Code build & testing</li>
-        <li><strong>Jenkins</strong> - Continuous Integration</li>
-        <li><strong>ArgoCD</strong> - Kubernetes GitOps deployment</li>
-        <li><strong>Helm</strong> - Kubernetes package manager</li>
-    </ol>
+        <section id="license">
+            <div class="container">
+                <div class="section-header">
+                    <h2><i class="fas fa-file-contract"></i> License</h2>
+                </div>
+                <p>MIT License - Feel free to use and modify this project.</p>
+            </div>
+        </section>
+    </main>
 
-    <h2><span class="emoji">🔍</span>Monitoring & Logging</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Component</th>
-                <th>Purpose</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Zipkin / Jaeger</td>
-                <td>Distributed Tracing</td>
-            </tr>
-            <tr>
-                <td>Prometheus + Grafana</td>
-                <td>Metrics & Alerts</td>
-            </tr>
-            <tr>
-                <td>ELK Stack (Elasticsearch, Logstash, Kibana)</td>
-                <td>Centralized Logging</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <h2><span class="emoji">🤝</span>Contributing</h2>
-    <p>Feel free to contribute to this project! Open an issue or create a pull request.</p>
-
-    <h2><span class="emoji">📜</span>License</h2>
-    <p>MIT License - Feel free to use and modify this project.</p>
-
-    <footer style="margin-top: 40px; text-align: center; padding-top: 20px; border-top: 1px solid var(--border);">
-        <p>Microservice Pet Clinic - <a href="https://github.com/PramithaMJ/ms-petclinic">GitHub Repository</a></p>
+    <footer>
+        <div class="container">
+            <p>Microservice Pet Clinic &copy; 2025 | <a href="https://github.com/PramithaMJ/ms-petclinic"><i class="fab fa-github"></i> GitHub Repository</a></p>
+        </div>
     </footer>
 
     <script>
-        function toggleTheme() {
+        // Theme toggle functionality
+        const themeToggle = document.querySelector('.theme-toggle');
+        const moonIcon = '<i class="fas fa-moon"></i>';
+        const sunIcon = '<i class="fas fa-sun"></i>';
+        
+        themeToggle.addEventListener('click', () => {
             document.body.classList.toggle('light-mode');
             
-            // Store preference in localStorage
-            const isLightMode = document.body.classList.contains('light-mode');
-            localStorage.setItem('lightMode', isLightMode);
-        }
-
-        // Check for saved theme preference
-        document.addEventListener('DOMContentLoaded', () => {
-            const isLightMode = localStorage.getItem('lightMode') === 'true';
-            if (isLightMode) {
-                document.body.classList.add('light-mode');
+            if (document.body.classList.contains('light-mode')) {
+                themeToggle.innerHTML = moonIcon;
+                localStorage.setItem('theme', 'light');
+            } else {
+                themeToggle.innerHTML = sunIcon;
+                localStorage.setItem('theme', 'dark');
             }
+        });
+        
+        // Check for saved theme preference or set a default
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
+                themeToggle.innerHTML = moonIcon;
+            } else {
+                themeToggle.innerHTML = sunIcon;
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
         });
     </script>
 </body>
