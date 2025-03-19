@@ -7,6 +7,8 @@ Microservice Pet Clinic is a fully distributed, cloud-native application designe
 [![Go Services CI](https://github.com/PramithaMJ/ms-petclinic/actions/workflows/go-services.yml/badge.svg)](https://github.com/PramithaMJ/ms-petclinic/actions/workflows/go-services.yml)
 [![Node.js Services CI](https://github.com/PramithaMJ/ms-petclinic/actions/workflows/node-services.yml/badge.svg)](https://github.com/PramithaMJ/ms-petclinic/actions/workflows/node-services.yml)
 [![Python application](https://github.com/PramithaMJ/ms-petclinic/actions/workflows/python-app.yml/badge.svg)](https://github.com/PramithaMJ/ms-petclinic/actions/workflows/python-app.yml)
+[![CodeQL](https://github.com/PramithaMJ/ms-petclinic/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/PramithaMJ/ms-petclinic/actions/workflows/github-code-scanning/codeql)
+[![Deploy Jekyll with GitHub Pages dependencies preinstalled](https://github.com/PramithaMJ/ms-petclinic/actions/workflows/jekyll-gh-pages.yml/badge.svg)](https://github.com/PramithaMJ/ms-petclinic/actions/workflows/jekyll-gh-pages.yml)
 
 ## 📌 Features
 - **Microservices Architecture**: Independently deployed services
